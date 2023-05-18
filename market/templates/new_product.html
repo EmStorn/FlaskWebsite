@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+Our Products
+{% endblock %}
+{% block content %}
+<body class="text-center">
+   <div class="container">
+      <div class="jumbotron">
+         <h1 class="display-4">Registration Page</h1>
+         <p class="lead">Input your data to create your account</p>
+         <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+      </div>
+      <form method="POST" class="form-signin" style="color:#A57548" enctype="multipart/form-data">
+         {{ form.hidden_tag() }}
+         <br>
+         {{ form.new_product_name.label() }}
+         {{ form.new_product_name(class="form-control", placeholder="Product name") }}
+         {{ form.new_product_description.label() }}
+         {{ form.new_product_description(class="form-control", placeholder="Brief product description") }}
+         {{ form.new_product_price.label() }}
+         {{ form.new_product_price(class="form-control", placeholder="Product price") }}
+         {{ form.new_product_image.label() }}
+         {{ form.new_product_image(class="form-control", placeholder="Product image") }}
+         <br>
+         <div class="checkbox mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+            <br>
+            <h6>Back to Products</h6>
+            <div class="button-container">
+               <a href="{{ url_for('products_page') }}">
+               <button type="button" class="btn btn-primary">Back</button>
+               </a>
+            </div>
+         </div>
+      </form>
+   </div>
+</body>
+{% endblock %}

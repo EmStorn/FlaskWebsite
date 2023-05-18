@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+    Order History Page
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+    <div class="container">
+      <div class="jumbotron">
+            <h1 class="display-4">Orders History</h1>
+            <p class="lead">View all received orders</p>
+            <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+            <br>
+      </div>
+<br>
+      <h3 class="lead">Complete order history:</h3>
+      <table id="admin-all-orders-table" class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Order Status</th>
+            <th scope="col">Total Cost</th>
+            <th scope="col">Products</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>{{ order.order_date }}</td>
+              <td>{{ order.order_status }}</td>
+              <td>{{ order.total_cost }}</td>
+              <td><a href="{{ url_for('order_details_page', order_id=order.id) }}">Order Details</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="button-container">
+        <button id="load-more-btn" class="btn btn-primary">Load More</button>
+        <br>
+        <br>
+
+        <a href="{{ url_for('admin_page') }}">
+    <button type="button" class="btn btn-primary">Back</button>
+    </a>
+
+</div>
+ <script src="{{ url_for('static', filename='scripts/load-more.js') }}"></script>
+    </body>
+{% endblock %}

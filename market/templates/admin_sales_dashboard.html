@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+Admin Sales Dashboard
+{% endblock %}
+{% block content %}
+<body class="text-center">
+   <div class="container">
+     <div class="jumbotron">
+           <h1 class="display-4">Sales Dashboard (Admin)</h1>
+           <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+           <p class="lead">Dashboard that shows Totals sales and total orders</p>
+           <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+       </div>
+     <br>
+   <body class="text-center">
+      <div class="container">
+        <div id="plot">{{ plot_sales|safe }}</div>
+        <br>
+        <div id="plot">{{ plot_orders|safe }}</div>
+        <br>
+        <div id="plot">{{ plot_avg_orders|safe }}</div>
+      </div>
+</body>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+    Personal Details Page
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+    <div class="container">
+      <div class="jumbotron">
+            <h1 class="display-4">{{ current_user.username }} Personal Details</h1>
+            <p class="lead">View and update your details</p>
+            <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+            <br>
+      </div>
+<br>
+      <h3 class="lead">Your current personal details, please modify the data that you want to update in the form:</h3>
+      <form method="POST" class="form-register" style="color:#A57548" novalidate>
+        {{ form.hidden_tag() }}
+
+              {{ form.phone_number.label() }}
+              {{ form.phone_number(class="form-control", value=personal_details.phone_number) }}
+
+              {{ form.address_city.label() }}
+              {{ form.address_city(class="form-control", value=personal_details.address_city) }}
+
+              {{ form.address_street.label() }}
+              {{ form.address_street(class="form-control", value=personal_details.address_street) }}
+
+              {{ form.address_street_optional.label() }}
+              {{ form.address_street_optional(class="form-control", value=personal_details.address_street_optional) }}
+
+              {{ form.address_postal_code.label() }}
+              {{ form.address_postal_code(class="form-control", value=personal_details.address_postal_code) }}
+
+              {{ form.address_country.label() }}
+              {{ form.address_country(class="form-control", value=personal_details.address_country) }}
+
+              <br>
+              <div class="button-container">
+                {{ form.submit(class="btn btn-primary") }}
+              <a href="{{ url_for('personal_details_page') }}">
+                <button type="button" class="btn btn-primary">Back</button>
+              </a>
+
+      </form>
+
+
+
+</div>
+    </body>
+{% endblock %}

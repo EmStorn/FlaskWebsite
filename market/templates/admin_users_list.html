@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+Admin Page
+{% endblock %}
+{% block content %}
+<body class="text-center">
+   <div class="container">
+     <div class="jumbotron">
+           <h1 class="display-4">Users List (Admin)</h1>
+           <p class="lead">All users currently registered</p>
+           <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+       </div>
+     <br>
+   <body class="text-center">
+      <div class="container">
+         <table class="table table-hover">
+            <thead>
+               <tr>
+                  <!-- Your Columns HERE -->
+                  <th scope="col">User_ID</th>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email Address</th>
+                  <th scope="col">Admin Role</th>
+                  <th scope="col">Additional Info</th>
+               </tr>
+            </thead>
+            <tbody>
+               <!-- Your rows inside the table HERE: -->
+               {% for user in registered_users %}
+               <tr>
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.email_address }}</td>
+                  <td>{{ user.admin_role }}</td>
+                  <td><a href="{{ url_for('personal_details_page', user_id=user.id, username=user.username) }}">Details</a></td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+</body>
+{% endblock %}

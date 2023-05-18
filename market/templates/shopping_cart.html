@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}
+Shopping Cart Page
+{% endblock %}
+{% block content %}
+<body class="text-center">
+   <div class="container">
+   <div class="jumbotron">
+      <h1 class="display-4">Your Shopping Cart</h1>
+      <p class="lead">Here are the items currently in your shopping cart:</p>
+   </div>
+   <div class="row gy-3 my-3">
+      {% for product in products_in_cart %}
+      <div class="col">
+         <div class="card" style="width: 18rem;">
+            <img src="{{url_for('static', filename='uploads/' +  product.Products.product_image)}}" class="card-img-top" alt="..." style="height: 18rem";></img>
+            <div class="card-body">
+               <h5 class="card-title">{{ product.Products.product_name }}</h5>
+               <p class="card-text">{{ product.Products.product_description }}</p>
+               <p class="card-text">Price: {{ product.Products.product_price }} $</p>
+               <form method="POST" class="form-signin" enctype="multipart/form-data">
+                  {{ form.hidden_tag() }}
+                  {{ form.product_id(class="form-control", value=product.Products.id, disabled=False) }}
+                  <h5>Currently you have {{ product.total_quantity }} units in the basket</h5>
+                  {{ form.product_units_in_sc.label() }}
+                  {{ form.product_units_in_sc(class="form-control", value=product.total_quantity, disabled=False) }}
+                  <br>
+                  <div class="row gy-3">
+                     <div class="col">
+                        {{ form.submit_remove(class="btn btn-primary") }}
+                     </div>
+                     <div class="col">
+                        {{ form.submit_change(class="btn btn-primary") }}
+                     </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+   <br>
+   <div class="total-cart-container">
+      <div class="card total-card" style="width: 100%;">
+         <div class="card-body">
+            {% if total_price != None %}
+            <h5 class="card-title">Shopping Cart Total: ${{ total_price }}</h5>
+            {% else %}
+            <h5 class="card-title">Shopping cart is empty, visit our shop to buy !</h5>
+            {% endif %}
+            {% if total_price != None %}
+            <form method="POST" class="form-signin" enctype="multipart/form-data">
+               {{ submit_order_form.hidden_tag() }}
+               {{ submit_order_form.submit(class="btn btn-primary") }}
+               {% else %}
+               <div class="button-container">
+                  <a href="{{ url_for('products_page') }}">
+                  <button type="button" class="btn btn-primary">Ckeck Our Products</button>
+                  </a>
+               </div>
+               {% endif %}
+            </form>
+         </div>
+      </div>
+   </div>
+</body>
+{% endblock %}

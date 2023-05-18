@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+    New batch
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+    <div class="container">
+        <form method="POST" class="form-signin" style="color:white" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+            <h1 class="h3 mb-3 font-weight-normal">
+                Please fill in the new batch data
+            </h1>
+            <br>
+            {{ form.product.label() }}
+            {{ form.product(class="form-control", placeholder="Product name") }}
+
+            {{ form.quantity.label() }}
+            {{ form.quantity(class="form-control", placeholder="Product quantity") }}
+
+            <br>
+
+
+            <div class="checkbox mb-3">
+               <h6>Back to Inventory</h6>
+               <a class="btn btn-sm btn-secondary" style="background-color:#82DDF0" href="{{ url_for('inventory_page') }}">Back</a>
+            </div>
+
+            {{ form.submit(class="btn btn-lg btn-block btn-primary", style="background-color:#F6C28B") }}
+
+        </form>
+    </div>
+</body>
+{% endblock %}

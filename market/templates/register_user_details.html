@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+    Register Details Page
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+    <div class="container">
+      <div class="jumbotron">
+            <h1 class="display-4">Registration Page Details</h1>
+            <p class="lead">Input your personal data to receive your shipment</p>
+            <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+        </div>
+      <br>
+        <form method="POST" class="form-register" style="color:#A57548" novalidate>
+          {{ form.hidden_tag() }}
+
+                {{ form.phone_number.label() }}
+                {{ form.phone_number(class="form-control", placeholder="Phone Number") }}
+
+                {{ form.address_city.label() }}
+                {{ form.address_city(class="form-control", placeholder="City") }}
+
+                {{ form.address_street.label() }}
+                {{ form.address_street(class="form-control", placeholder="Street") }}
+
+                {{ form.address_street_optional.label() }}
+                {{ form.address_street_optional(class="form-control", placeholder="Optional") }}
+
+                {{ form.address_postal_code.label() }}
+                {{ form.address_postal_code(class="form-control", placeholder="Postal Code") }}
+
+                {{ form.address_country.label() }}
+                {{ form.address_country(class="form-control", placeholder="Country") }}
+
+                <br>
+
+                {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+        </form>
+    </div>
+</body>
+{% endblock %}

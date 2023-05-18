@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}
+    User Page
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+    <div class="container">
+      <div class="jumbotron">
+            <h1 class="display-4">{{ current_user.username }} personal page</h1>
+            <p class="lead">View your orders and update personal information</p>
+            <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+            <br>
+      </div>
+      <div class="button-container">
+        <a href="{{ url_for('user_all_orders_page') }}">
+        <button type="button" class="btn btn-primary">All orders</button>
+        </a>
+        {% if personal_details %}
+        <a href="{{ url_for('personal_details_page') }}">
+    <button type="button" class="btn btn-primary">Personal Data</button>
+    </a>
+    {% else %}
+      <a href="{{ url_for('register_additional_page') }}">
+  <button type="button" class="btn btn-primary">Personal Data</button>
+  </a>
+  {% endif %}
+</div>
+<br>
+      <h3 class="lead">Your last five orders:</h3>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Order Status</th>
+            <th scope="col">Total Cost</th>
+            <th scope="col">Products</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in last_five_orders %}
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>{{ order.order_date }}</td>
+              <td>{{ order.order_status }}</td>
+              <td>{{ order.total_cost }}</td>
+              <td><a href="{{ url_for('order_details_page', order_id=order.id) }}">Order Details</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </body>
+{% endblock %}

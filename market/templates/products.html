@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}
+Our Products
+{% endblock %}
+{% block content %}
+<body class="text-center">
+  <div class="container">
+    <div class="jumbotron">
+          <h1 class="display-4">Our products</h1>
+          <p class="lead">Take a look at our currently available products</p>
+          <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+      </div>
+
+      <div class="row gy-3 my-3">
+         {% for product in products_for_sale %}
+         {% include 'includes/item_details_modal.html' %}
+         <div class="col">
+            <div class="card" style="width: 18rem;">
+               <img src="{{url_for('static', filename='uploads/' +  product.Products.product_image)}}" class="card-img-top" alt="..." style="height: 18rem";></img>
+               <div class="card-body">
+                  <h5 class="card-title">{{ product.Products.product_name }}</h5>
+                  <p class="card-text">{{ product.Products.product_description }}</p>
+                  <p class="card-text">Price: {{ product.Products.product_price }} $</p>
+                  {% if current_user.admin_role %}
+                  <p class="card-text">Quantity: {{ product[2] }}</p>
+                  {% else %}
+                  {% if product[2] is none %}
+                  <p class="card-text">Currently Unavailable</p>
+                  {% elif product[2] > 0 and product[2] < 10 %}
+                  <p class="card-text">Only few units left !</p>
+                  {% else %}
+                  <p class="card-text">In Stock</p>
+                  {% endif %}
+                  {% endif %}
+                  <div class="row gy-3">
+                     <div class="col">
+                        <a href="#" class="btn btn-primary float-start" data-bs-toggle="modal" data-bs-target="#Modal-Details-{{ product.Products.id }}">Details</a>
+                     </div>
+                     <div class="col">
+                        {% if current_user.admin_role %}
+                        <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#Modal-Modify-{{ product.Products.id }}">Modify</a>
+                        {% else %}
+                        <a href="#" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#Modal-Buy-{{ product.Products.id }}">Buy</a>
+                        {% endif %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+   </body>
+      {% endblock %}

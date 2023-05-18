@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+Admin Page
+{% endblock %}
+{% block content %}
+<body class="text-center">
+   <div class="container">
+      <div class="jumbotron">
+         <h1 class="display-4">Our Story</h1>
+         <p class="lead">Discover more about our passion !</p>
+         <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+      </div>
+   </div>
+   <div class="container">
+      <h2>
+      The family business of honey production has been operating since 1998 on the hills of Italy. The family is passionate about beekeeping and is dedicated to producing the highest quality honey. They have a deep respect for the environment and take great care to ensure that their beekeeping practices are sustainable and beneficial to the local biodiversity.</h3>
+      <br>
+      <div class="image-container-about">
+         <img src="{{url_for('static', filename='bees3.jpg')}}" class="d-block w-100" alt="Photo by Chinh Le Duc on Unsplash">
+      </div>
+      <p>The family has established a network of beekeepers in the area, allowing them to source the best local honey. They use traditional methods of beekeeping, such as wooden hives, and have developed a unique approach to harvesting the honey. The hives are placed in areas of high biodiversity, such as forests, meadows, and wetlands, and the honey is collected in a way that minimizes disruption to the environment.</p>
+      <p>The family produces a wild honey, which is only available in limited amounts. This honey is made from the nectar of wild flowers and plants, and is collected from the hives in the most remote areas of the hills. It has a unique flavor and aroma, and is highly sought after by honey connoisseurs.</p>
+      <p>The family is committed to preserving the environment and promoting biodiversity. They have implemented a number of initiatives to ensure that their beekeeping practices are sustainable and beneficial to the local ecosystem. They have planted a variety of native plants and flowers to provide food for the bees, and have set up nesting boxes to encourage the growth of wild bee populations. They also use natural pest control methods to protect the hives from disease.</p>
+      <p>The family is passionate about producing the highest quality honey and takes great care to ensure that their products are of the highest standard. They use traditional methods of extraction and filtering to ensure that the honey is pure and free from contaminants. They also take great care to ensure that the honey is packaged and stored correctly, to preserve its flavor and aroma.</p>
+   </div>
+</body>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}
+    Welcome to ES Producers shop
+{% endblock %}
+{% block content %}
+<!-- Carousel with images and text description -->
+<body class="text-center">
+  <div id="carouselHomePage" class="carousel slide data-bs-ride="false">
+     <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="2" aria-label="Slide 3"></button>
+     </div>
+     <div class="carousel-inner ps-3 pe-3" id="carousel-home">
+        <div class="carousel-item active">
+           <img src="{{url_for('static', filename='bees1.jpg')}}" class="d-block w-100" alt="Photo by Bianca Ackermann on Unsplash">
+           <div class="carousel-caption d-none d-md-block">
+              <h5>ES Honey Producers</h5>
+              <p>Organic Honey, respect for nature.</p>
+           </div>
+        </div>
+        <div class="carousel-item">
+           <img src="{{url_for('static', filename='bees2.jpg')}}" class="d-block w-100" alt="Photo by Bianca Ackermann on Unsplash">
+           <a href="{{ url_for('about_page') }}">
+           <div class="carousel-caption d-none d-md-block">
+              <h5>Read about our history !</h5>
+              <p>Operating since 1998 with passion, read our story.</p>
+           </div>
+           </a>
+        </div>
+        <div class="carousel-item">
+           <img src="{{url_for('static', filename='bees3.jpg')}}" class="d-block w-100" alt="Photo by Chinh Le Duc on Unsplash">
+           <a href="{{ url_for('products_page') }}">
+           <div class="carousel-caption d-none d-md-block">
+              <h5>Visit our shop !</h5>
+              <p>Have a look at our products.</p>
+           </div>
+           </a>
+        </div>
+     </div>
+     <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage" data-bs-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <span class="visually-hidden">Previous</span>
+     </button>
+     <button class="carousel-control-next" type="button" data-bs-target="#carouselHomePage" data-bs-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="visually-hidden">Next</span>
+     </button>
+  </div>
+  <br>
+  <div class="container">
+    <div class="jumbotron">
+          <h1 class="display-4">Here's just a sample of our products</h1>
+          <p class="lead">Discover more about our passion !</p>
+          <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+      </div>
+      <div class="row">
+    {% for product in random_products %}
+      <div class="col-md-6">
+        <div class="card">
+          <img class="card-img-top" src="{{ url_for('static', filename='uploads/' + product.product_image) }}">
+          <div class="card-body">
+            <h4 class="card-title">{{ product.product_name }}</h4>
+            <p class="card-text">{{ product.product_description }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <br>
+  <h4>Visit our <a id="shop-link" href="{{ url_for('products_page') }}">Shop</a> to find out more and discover all our products.</h4>
+  </div>
+</body>
+{% endblock %}

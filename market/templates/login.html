@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+Login Page
+{% endblock %}
+{% block content %}
+<body class="text-center">
+   <div class="container">
+      <div class="jumbotron">
+         <h1 class="display-4">Login Page</h1>
+         <p class="lead">Input your data login, or create an account !</p>
+         <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+      </div>
+      <br>
+      <form method="POST" class="form-signin" style="color:#A57548e">
+         {{ form.hidden_tag() }}
+         {{ form.username.label() }}
+         {{ form.username(class="form-control", placeholder="User Name") }}
+         {{ form.password.label() }}
+         {{ form.password(class="form-control", placeholder="Password") }}
+         <br>
+         <div class="checkbox mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+            <br>
+            <h6>Do not have an account?</h6>
+            <div class="button-container">
+               <a href="{{ url_for('register_page') }}">
+               <button type="button" class="btn btn-primary">Register</button>
+               </a>
+            </div>
+         </div>
+      </form>
+   </div>
+</body>
+{% endblock %}

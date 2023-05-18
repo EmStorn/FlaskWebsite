@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}
+Order {{ order_id }} Details Page
+{% endblock %}
+{% block content %}
+<body class="text-center">
+   <div class="container">
+   <div class="jumbotron">
+      <h1 class="display-4">Order #{{ order_id }} details</h1>
+      {% if current_user.admin_role %}
+      <p class="lead">A detail of the products bought by {{ user_info.username }}, and shipping info</p>
+      {% else %}
+      <p class="lead">A detail of the products you bought !</p>
+      {% endif %}
+      <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+      <br>
+   </div>
+   <form method="POST" class="form-signin" enctype="multipart/form-data">
+       {{ form.hidden_tag() }}
+   <div class="row gy-3">
+      <div class="col">
+         {{ form.submit_in_progress(class="btn btn-primary") }}
+      </div>
+      <div class="col">
+         {{ form.submit_shipped(class="btn btn-primary") }}
+
+      </div>
+   </div>
+   </form>
+
+   {% if current_user.admin_role %}
+   <table class="table table-hover">
+      <thead>
+         <tr>
+            <!-- Your Columns HERE -->
+            <th scope="col">User ID</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">City</th>
+            <th scope="col">Street (Address)</th>
+            <th scope="col">Additional info (Optional)</th>
+            <th scope="col">Postal Code</th>
+            <th scope="col">Country</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>{{ user_details.user_id }}</td>
+              <td>{{ user_details.phone_number }}</td>
+              <td>{{ user_details.address_city }}</td>
+              <td>{{ user_details.address_street }}</td>
+              <td>{{ user_details.address_street_optional }}</td>
+              <td>{{ user_details.address_postal_code }}</td>
+              <td>{{ user_details.address_country }}</td>
+         </tr>
+      </tbody>
+   </table>
+   {% endif %}
+
+     <div class="row gy-3 my-3">
+{% for product in products_ordered %}
+
+        <div class="col">
+
+           <div class="card" style="width: 18rem;">
+              <img src="{{url_for('static', filename='uploads/' +  product.product_image)}}" class="card-img-top" alt="..." style="height: 18rem";></img>
+              <div class="card-body">
+                 <h5 class="card-title">{{ product.product_name }}</h5>
+                 <p class="card-text">{{ product.product_description }}</p>
+                 <p class="card-text">Unit Price: {{ product.product_price }} $</p>
+                 {% for order in order_details %}
+                 {% if order.product_id == product.id %}
+                 <p class="card-text">Quantity Ordered: {{ order.quantity }} units</p>
+
+                 {% endif %}
+                 {% endfor %}
+              </div>
+           </div>
+
+        </div>
+ {% endfor %}
+     </div>
+     <div class="button-container">
+       {% if current_user.admin_role %}
+       <a href="{{ url_for('admin_open_orders_page') }}">
+         <button type="button" class="btn btn-primary">Back</button>
+       </a>
+       {% else %}
+     <a href="{{ url_for('user_page') }}">
+       <button type="button" class="btn btn-primary">Back</button>
+     </a>
+     {% endif %}
+     </div>
+
+
+</body>
+{% endblock %}

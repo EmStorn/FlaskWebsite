@@ -1,0 +1,40 @@
+.carousel .carousel-item {
+  height: 650px;
+}
+
+.carousel-item img {
+    position: absolute;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    min-height: 700px;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.4); /* Darken the background color */
+  color: #fff; /* Set text color to white */
+  padding: 10px; /* Add some padding for readability */
+}
+
+.btn {
+    border: none;
+    background-color: #82DDF0;
+}
+
+.body {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.my-svg {
+  fill: #A57548;
+}
+
+tr.extra-row {
+   display: none;
+}
+
+#shop-link {
+  text-decoration: none;
+  color: #5296A5;
+}

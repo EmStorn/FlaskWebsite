@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}
+    Personal Details Page
+{% endblock %}
+
+{% block content %}
+<body class="text-center">
+    <div class="container">
+      <div class="jumbotron">
+            {% if current_user.admin_role %}
+            <h1 class="display-4">{{ username }} Personal Details</h1>
+            <p class="lead">View user details</p>
+            {% else %}
+            <h1 class="display-4">{{ current_user.username }} Personal Details</h1>
+            <p class="lead">View and update your details</p>
+            {% endif %}
+            <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+            <br>
+      </div>
+<br>
+      {% if current_user.admin_role %}
+      <h3 class="lead">User personal details:</h3>
+      {% else %}
+      <h3 class="lead">Your current personal details:</h3>
+      {% endif %}
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">City</th>
+            <th scope="col">Street (Address)</th>
+            <th scope="col">Additional info (Optional)</th>
+            <th scope="col">Postal Code</th>
+            <th scope="col">Country</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>{{ personal_details.user_id }}</td>
+              <td>{{ personal_details.phone_number }}</td>
+              <td>{{ personal_details.address_city }}</td>
+              <td>{{ personal_details.address_street }}</td>
+              <td>{{ personal_details.address_street_optional }}</td>
+              <td>{{ personal_details.address_postal_code }}</td>
+              <td>{{ personal_details.address_country }}</td>
+            </tr>
+        </tbody>
+      </table>
+      <br>
+      <div class="button-container">
+        {% if current_user.admin_role %}
+        <a href="{{ url_for('admin_users_page') }}">
+          <button type="button" class="btn btn-primary">Back</button>
+        </a>
+        {% else %}
+      <a href="{{ url_for('user_page') }}">
+        <button type="button" class="btn btn-primary">Back</button>
+      </a>
+      <a href="{{ url_for('modify_personal_details_page') }}">
+        <button type="button" class="btn btn-primary">Update Data</button>
+      </a>
+      {% endif %}
+
+</div>
+    </body>
+{% endblock %}

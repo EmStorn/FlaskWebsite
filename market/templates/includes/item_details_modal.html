@@ -1,0 +1,85 @@
+<!-- Modal Details -->
+<div class="modal fade" id="Modal-Details-{{ product.Products.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ product.Products.product_name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-3">
+        <p class="fs-5">{{ product.Products_detailed_description.detailed_description }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Modify -->
+<div class="modal fade" id="Modal-Modify-{{ product.Products.id }}" tabindex="-0" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ product.Products.product_name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" class="form-signin" enctype="multipart/form-data">
+            {{ form_description.hidden_tag() }}
+            <h1 class="h3 mb-3 fw-normal">
+                Modify product description
+            </h1>
+
+            {{ form_description.product_id.label() }}
+            {{ form_description.product_id(class="form-control", value=product.Products.id, disabled=False) }}
+            {{ form_description.basic_description.label() }}
+            {{ form_description.basic_description(class="form-control", default="Add a basic description", value=product.Products.product_description, disabled=False, required=False) }}
+            {{ form_description.detailed_description.label() }}
+            {{ form_description.detailed_description(class="form-control", default="Add a detailed description", value=product.Products_detailed_description.detailed_description, disabled=False, required=False) }}
+            <br>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              {{ form_description.submit(class="btn btn-primary") }}
+            </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal Buy -->
+<div class="modal fade" id="Modal-Buy-{{ product.Products.id }}" tabindex="1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ product.Products.product_name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" class="form-signin" enctype="multipart/form-data">
+            {{ form_purchase.hidden_tag() }}
+            <h1 class="h3 mb-3 fw-normal">
+                Buy product
+            </h1>
+            <h3>{{ product.Products_detailed_description.detailed_description }}</h3>
+            <h3>Quantity: {{ product[2] }}</h3>
+            {{ form_purchase.product_id(class="form-control", value=product.Products.id, disabled=False) }}
+            {{ form_purchase.product_units_to_buy.label() }}
+            {{ form_purchase.product_units_to_buy(class="form-control", disabled=False, placeholder="Max units available: {}".format(product[2]), required=False) }}
+            {{ form_purchase.product_units_available(class="form-control", disabled=False, value=product[2]) }}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+            {% if product[2] != None %}
+              {{ form_purchase.submit(class="btn btn-primary") }}
+            {% endif %}
+          </div>
+    </div>
+  </div>
+</div>

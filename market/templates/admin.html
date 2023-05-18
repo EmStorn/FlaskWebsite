@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}
+Admin Page
+{% endblock %}
+{% block content %}
+<body class="text-center">
+   <div class="container">
+   <div class="jumbotron">
+      <h1 class="display-4">Admin Page</h1>
+      <p class="lead">Take a look at our currently available products</p>
+      <img class="mb-4" src="{{url_for('static', filename='bee_logo_25.png')}}" alt="Bee_logo">
+   </div>
+   <br>
+   <div class="container">
+   <div class="row gy-3 my-3">
+   <div class="col">
+      <div class="card" style="width: 18rem;">
+         <img src="{{url_for('static', filename='food-basket.svg')}}" class="card-img-top" alt="..." style="height: 18rem";></img>
+         <div class="card-body">
+            <h5 class="card-title">Products</h5>
+            <p class="card-text">View and modify products available</p>
+            <p class="card-text">Test2 $</p>
+            <a href="{{ url_for('products_page') }}">
+            <button type="button" class="btn btn-primary">Products</button>
+            </a>
+            <a href="{{ url_for('new_product_page') }}">
+            <button type="button" class="btn btn-primary">Add New Product</button>
+            </a>
+         </div>
+      </div>
+   </div>
+   <div class="col">
+      <div class="card" style="width: 18rem;">
+         <img src="{{url_for('static', filename='cart-alt.svg')}}" class="card-img-top" alt="..." style="height: 18rem";></img>
+         <div class="card-body">
+            <h5 class="card-title">Order Management</h5>
+            <p class="card-text">View and manage orders</p>
+            <p class="card-text">Test2 $</p>
+            <a href="{{ url_for('admin_open_orders_page') }}">
+            <button type="button" class="btn btn-primary">Open Orders</button>
+            </a>
+            <a href="{{ url_for('admin_all_orders_page') }}">
+            <button type="button" class="btn btn-primary">All orders</button>
+            </a>
+         </div>
+      </div>
+   </div>
+   <div class="col">
+      <div class="card" style="width: 18rem;">
+         <img src="{{url_for('static', filename='dashboard-web.svg')}}" class="card-img-top" alt="..." style="height: 18rem; fill=#A57548";></img>
+         <div class="card-body">
+            <h5 class="card-title">Dashboards</h5>
+            <p class="card-text">Test</p>
+            <p class="card-text">Test2 $</p>
+            <a href="{{ url_for('sales_dashboard_page') }}">
+            <button type="button" class="btn btn-primary">Sales report</button>
+            </a>
+            <a href="{{ url_for('products_dashboard_page') }}">
+            <button type="button" class="btn btn-primary">Products report</button>
+            </a>
+         </div>
+      </div>
+   </div>
+   <div class="col">
+      <div class="card" style="width: 18rem;">
+         <img src="{{url_for('static', filename='users-social.svg')}}" class="card-img-top" alt="..." style="height: 18rem; fill=#A57548";></img>
+         <div class="card-body">
+            <h5 class="card-title">Users</h5>
+            <p class="card-text">Test</p>
+            <p class="card-text">Test2 $</p>
+            <a href="{{ url_for('admin_users_page') }}">
+            <button type="button" class="btn btn-primary">Users List</button>
+            </a>
+         </div>
+      </div>
+   </div>
+</body>
+{% endblock %}
